@@ -42,9 +42,11 @@ public class Deque<Item> implements Iterable<Item> {
         Node oldfirst = first;
         first = new Node();
         first.item = item;
-        first.next = oldfirst ;
         first.before = null;
-        oldfirst.before = first;
+        if (oldfirst==null) first.next = null ;
+        else { first.next = oldfirst;
+        oldfirst.before = first; }
+        if (last==null) last = first;
         n++;
     }
 
@@ -56,8 +58,10 @@ public class Deque<Item> implements Iterable<Item> {
         last = new Node();
         last.item = item;
         last.next = null;
-        last.before = oldlast;
-        oldlast.next = last;
+        if(oldlast == null) last.before = null;
+        else { last.before = oldlast;
+        oldlast.next = last; }
+        if (first == null) first = last;
         n++;
     }
 
